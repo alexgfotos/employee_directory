@@ -7,7 +7,7 @@ export const Employee = () => {
   const [employees, setEmployees] = useState([]);
   // const [names, setNames] = useState([]);
   const [filter, setFilter] = useState("");
-  const [userInput, setUserInput] = useState("")
+  
 
   function getEmployees() {
     API.fetchEmployees()
@@ -40,11 +40,25 @@ export const Employee = () => {
     //   filteredUsers.push(employees[i])
     // }
   }
+
+  // let sortedNames = []
+  
+  function sortEmployees (event) {
+    event.preventDefault();
+    // updateValue(event);
+    if(event.target.value === "lastName"){
+    // setNames(employees);
+    employees.sort((a, b) => (a.name > b.name) ? 1 : -1)
+    console.log(employees)
+    return employees
+    }
+
+  }
   
   // GOOGLE IT
   // .sort()
 
-  console.log(userInput)
+  
   console.log(filter)
 
 
@@ -61,7 +75,7 @@ export const Employee = () => {
         <div className="input-group-prepend">
           <label className="input-group-text bg-dark text-light" htmlFor="inputGroupSelect01">Sort Employees By:</label>
         </div>
-        <select className="custom-select" id="inputGroupSelect01">
+        <select onChange={sortEmployees} className="custom-select" id="inputGroupSelect01">
           <option defaultValue>Choose...</option>
           <option value="age">Age</option>
           <option value="city">City</option>

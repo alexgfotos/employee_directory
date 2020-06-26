@@ -7,7 +7,7 @@ export default {
 
   fetchEmployees: function () {
     return axios
-      .get("https://randomuser.me/api/?results=200&nat=us")
+      .get("https://randomuser.me/api/?results=20&nat=us")
       .then(res => {
         const employees = res.data.results;
         return employees.map(employee => {
