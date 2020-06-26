@@ -5,21 +5,53 @@ import API from "../../utils/API";
 
 export const Employee = () => {
   const [employees, setEmployees] = useState([]);
-  const [names, setNames] = useState([]);
+  // const [names, setNames] = useState([]);
+  const [filter, setFilter] = useState("");
+  const [userInput, setUserInput] = useState("")
 
   function getEmployees() {
     API.fetchEmployees()
       .then(res => {
         setEmployees(res)
-        setNames(res.name )
+        // setNames(res.name )
         // console.log(employees)
       })
       .catch(err => console.log(err));
   }
 
+  function updateValue(event){  
+  const { value } = event.target;
+  setFilter(value);
+  }
+
+
+  let filteredUsers = []
+  for (let i = 0; i < employees.length; i++) {
+    if (employees[i].name.toLowerCase().includes(filter.toLowerCase())) {
+      filteredUsers.push(employees[i])
+    }
+    // else if (employees[i].age.toString().includes(filter)) {
+    //   filteredUsers.push(employees[i])
+    // }
+    else if (employees[i].location.toLowerCase().includes(filter.toLowerCase())) {
+      filteredUsers.push(employees[i])
+    }
+    // else if (employees[i].number.includes(filter.toString())) {
+    //   filteredUsers.push(employees[i])
+    // }
+  }
+  
+  // GOOGLE IT
+  // .sort()
+
+  console.log(userInput)
+  console.log(filter)
+
+
   useEffect(getEmployees, [])
-  console.log("emp" + employees)
-  console.log("names" + names)
+
+  // console.log("emp" + employees)
+  // console.log("names" + names)
 
   // const { employee } = useContext(EmployeeContext)
   return (
@@ -35,7 +67,16 @@ export const Employee = () => {
           <option value="city">City</option>
           <option value="lastName">Last Name</option>
         </select>
+        <div className="input-group-prepend">
+          <label className="input-group-text bg-dark text-light" htmlFor="inputGroupSelect01">Search Name:</label>
+        </div>
+        <input type="text" onChange={updateValue} ></input>
+        <div className="input-group-prepend">
+          <label className="input-group-text bg-dark text-light" htmlFor="inputGroupSelect01">Search Location:</label>
+        </div>
+        <input type="text" onChange={updateValue} ></input>
       </div>
+      
       <table className="table table-dark table-hover">
         <thead>
           <tr>
@@ -50,7 +91,7 @@ export const Employee = () => {
           </tr>
         </thead>
         <tbody>
-          {employees.map(employee => (
+          {filteredUsers.map(employee => (
             <tr key={employee.key.toString()}><
               td><img alt="Employee Portrait" src={employee.image}></img></td>
               <td className="lead h3" >{employee.name}</td>
@@ -58,7 +99,7 @@ export const Employee = () => {
               <td>{employee.age}</td>
               <td>{employee.location}</td>
             </tr>))}
-            {/* {console.log(JSON.stringify(names))} */}
+          {/* {console.log(JSON.stringify(names))} */}
         </tbody>
       </table>
 
