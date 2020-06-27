@@ -76,7 +76,7 @@ export const Employee = () => {
   // const { employee } = useContext(EmployeeContext)
   return (
     <div>
-      <div className="jumbotron bg-dark text-center"><h1 className="text-light">Welcome to EMPLOYOTRON 9001!</h1></div>
+      <div  className="jumbotron bg-dark text-center"><h1 className="text-light">Welcome to EMPLOYOTRON 9001!</h1></div>
       <div className="input-group mb-3">
         <div className="input-group-prepend">
           <label className="input-group-text bg-dark text-light" htmlFor="inputGroupSelect01">Sort Employees By:</label>
