@@ -26,7 +26,6 @@ function Gallery() {
     <EmployeeContext.Provider value={{ employee, employees }}>
       <div>
         <h1 className="text-center">Welcome to Employotran 9001</h1>
-        <h3 className="text-center">Click on the arrows to browse users</h3>
         <Employee>  </Employee>
       </div>
     </EmployeeContext.Provider>

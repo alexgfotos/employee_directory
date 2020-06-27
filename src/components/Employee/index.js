@@ -20,6 +20,7 @@ export const Employee = () => {
       .catch(err => console.log(err));
   }
 
+
   function updateValue(event) {
     const { value } = event.target;
     setFilter(value);
@@ -53,12 +54,12 @@ export const Employee = () => {
   }
 
   else if (sort === "age") {
-    // setNames(employees);
+    
     filteredUsers.sort((a, b) => (a.age > b.age) ? 1 : -1)
   }
 
   else if (sort === "city") {
-    // setNames(employees);
+   
     filteredUsers.sort((a, b) => (a.location > b.location) ? 1 : -1)
   }
 
