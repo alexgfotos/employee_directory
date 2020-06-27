@@ -7,7 +7,8 @@ export const Employee = () => {
   const [employees, setEmployees] = useState([]);
   // const [names, setNames] = useState([]);
   const [filter, setFilter] = useState("");
-  
+  const [sort, setSort] = useState("");
+
 
   function getEmployees() {
     API.fetchEmployees()
@@ -19,9 +20,15 @@ export const Employee = () => {
       .catch(err => console.log(err));
   }
 
-  function updateValue(event){  
-  const { value } = event.target;
-  setFilter(value);
+  function updateValue(event) {
+    const { value } = event.target;
+    setFilter(value);
+  }
+
+  function updateSort(event) {
+    const { value } = event.target;
+    setSort(value);
+    console.log(sort)
   }
 
 
@@ -41,24 +48,23 @@ export const Employee = () => {
     // }
   }
 
-  // let sortedNames = []
-  
-  function sortEmployees (event) {
-    event.preventDefault();
-    // updateValue(event);
-    if(event.target.value === "lastName"){
-    // setNames(employees);
-    employees.sort((a, b) => (a.name > b.name) ? 1 : -1)
-    console.log(employees)
-    return employees
-    }
-
+  if (sort === "lastName") {
+    filteredUsers.sort((a, b) => (a.name > b.name) ? 1 : -1)
   }
-  
-  // GOOGLE IT
-  // .sort()
 
-  
+  else if (sort === "age") {
+    // setNames(employees);
+    filteredUsers.sort((a, b) => (a.age > b.age) ? 1 : -1)
+  }
+
+  else if (sort === "city") {
+    // setNames(employees);
+    filteredUsers.sort((a, b) => (a.location > b.location) ? 1 : -1)
+  }
+
+
+
+
   console.log(filter)
 
 
@@ -75,7 +81,7 @@ export const Employee = () => {
         <div className="input-group-prepend">
           <label className="input-group-text bg-dark text-light" htmlFor="inputGroupSelect01">Sort Employees By:</label>
         </div>
-        <select onChange={sortEmployees} className="custom-select" id="inputGroupSelect01">
+        <select onChange={updateSort} className="custom-select" id="inputGroupSelect01">
           <option defaultValue>Choose...</option>
           <option value="age">Age</option>
           <option value="city">City</option>
@@ -90,7 +96,7 @@ export const Employee = () => {
         </div>
         <input type="text" onChange={updateValue} ></input>
       </div>
-      
+
       <table className="table table-dark table-hover">
         <thead>
           <tr>
